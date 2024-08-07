@@ -1,6 +1,0 @@
-command=RepairPDB
-pdb=$PDBS$
-temperature=298
-water=-PREDICT
-complexWithDNA=false
-pdbWaters=true
