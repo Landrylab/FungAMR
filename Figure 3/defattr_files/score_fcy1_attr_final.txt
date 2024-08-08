@@ -1,0 +1,13 @@
+#
+attribute: score
+match mode: 1-to-1
+recipient: residues
+	:14	4.0
+	:15	1.0
+	:18	4.0
+	:20	4.0
+	:35	1.0
+	:37	4.0
+	:62	4.0
+	:87	8.0
+	:95	4.0
