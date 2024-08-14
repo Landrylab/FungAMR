@@ -1,0 +1,89 @@
+label	Species	Subphylum	Host	mutations	log10_mutations
+Alternaria_alternata	Alternaria alternata	Pezizomycotina	plants	9	0.954242509439325
+Alternaria_solani	Alternaria solani	Pezizomycotina	plants	6	0.778151250383644
+Trichophyton_tonsurans	Arthroderma vanbreuseghemii	Pezizomycotina	human and animals	6	0.778151250383644
+Aspergillus_awamori	Aspergillus awamori	Pezizomycotina	human and animals	1	0
+Aspergillus_flavus	Aspergillus flavus	Pezizomycotina	human and plants	38	1.57978359661681
+Aspergillus_fumigatus	Aspergillus fumigatus	Pezizomycotina	human and animals	138	2.13987908640124
+Aspergillus_niger	Aspergillus niger	Pezizomycotina	human and animals	10	1
+Aspergillus_oryzae	Aspergillus oryzae	Pezizomycotina	human and animals	5	0.698970004336019
+Aspergillus_terreus	Aspergillus terreus	Pezizomycotina	human and animals	1	0
+Aspergillus_tubingensis	Aspergillus tubingensis	Pezizomycotina	human and animals	8	0.903089986991944
+Beauveria_bassiana	Beauveria bassiana	Pezizomycotina	human and animals	5	0.698970004336019
+Blumeria_graminis	Blumeria graminis	Pezizomycotina	plants	6	0.778151250383644
+Botrytis_cinerea	Botrytis cinerea	Pezizomycotina	human and plants	43	1.63346845557959
+Candida_albicans	Candida albicans	Saccharomycotina	human and animals	4006	3.60271094495756
+Candida_auris	Candida auris	Saccharomycotina	human and animals	73	1.86332286012046
+Candida_dubliniensis	Candida dubliniensis	Saccharomycotina	human and animals	23	1.36172783601759
+Kluyveromyces_marxianus	Candida kefyr	Saccharomycotina	human and animals	3	0.477121254719662
+Pichia_kudriavzevii	Candida krusei	Saccharomycotina	human and animals	5	0.698970004336019
+Clavispora_lusitaniae	Candida lusitaniae	Saccharomycotina	human and animals	10	1
+Candida_metapsilosis	Candida metapsilosis	Saccharomycotina	human and animals	1	0
+Candida_orthopsilosis	Candida orthopsilosis	Saccharomycotina	human and animals	4	0.602059991327962
+Candida_parapsilosis	Candida parapsilosis	Saccharomycotina	human and animals	17	1.23044892137827
+Candida_tropicalis	Candida tropicalis	Saccharomycotina	human and animals	21	1.32221929473392
+Cercospora_beticola	Cercospora beticola	Pezizomycotina	plants	2	0.301029995663981
+Cercospora_sojina	Cercospora sojina	Pezizomycotina	plants	1	0
+Colletotrichum_acutatum	Colletotrichum acutatum	Pezizomycotina	plants	3	0.477121254719662
+Colletotrichum_asianum	Colletotrichum asianum	Pezizomycotina	plants	1	0
+Colletotrichum_cereale	Colletotrichum cereale	Pezizomycotina	plants	5	0.698970004336019
+Colletotrichum_fructicola	Colletotrichum fructicola	Pezizomycotina	plants	2	0.301029995663981
+Colletotrichum_gloeosporioides	Colletotrichum gloeosporioides	Pezizomycotina	plants	29	1.46239799789896
+Colletotrichum_graminicola	Colletotrichum graminicola	Pezizomycotina	plants	1	0
+Colletotrichum_nymphaeae	Colletotrichum nymphaeae	Pezizomycotina	plants	2	0.301029995663981
+Colletotrichum_siamense	Colletotrichum siamense	Pezizomycotina	plants	3	0.477121254719662
+Colletotrichum_truncatum	Colletotrichum truncatum	Pezizomycotina	plants	12	1.07918124604762
+Corynespora_cassiicola	Corynespora cassiicola	Pezizomycotina	human and plants	12	1.07918124604762
+Cryptococcus_deneoformans	Cryptococcus deneoformans	Agaricomycotina	human and animals	1	0
+Cryptococcus_gattii_VGII	Cryptococcus deuterogattii	Agaricomycotina	human and animals	14	1.14612803567824
+Cryptococcus_gattii_VGIV	Cryptococcus gattii	Agaricomycotina	human and animals	1	0
+Cryptococcus_neoformans	Cryptococcus neoformans	Agaricomycotina	human and animals	53	1.72427586960079
+Diaporthe_eres	Diaporthe eres	Pezizomycotina	plants	2	0.301029995663981
+Diaporthe_unshiuensis	Diaporthe unshiuensis	Pezizomycotina	plants	2	0.301029995663981
+Didymella_bryoniae	Didymella bryoniae	Pezizomycotina	plants	2	0.301029995663981
+Erysiphe_necator	Erysiphe necator	Pezizomycotina	plants	4	0.602059991327962
+Fusarium_asiaticum	Fusarium asiaticum	Pezizomycotina	plants	21	1.32221929473392
+Fusarium_fujikuroi	Fusarium fujikuroi	Pezizomycotina	plants	11	1.04139268515823
+Fusarium_graminearum	Fusarium graminearum	Pezizomycotina	plants	27	1.43136376415899
+Fusarium_incarnatum	Fusarium incarnatum	Pezizomycotina	plants	3	0.477121254719662
+Fusarium_oxysporum	Fusarium oxysporum	Pezizomycotina	plants	2	0.301029995663981
+Fusarium_pseudograminearum	Fusarium pseudograminearum	Pezizomycotina	plants	3	0.477121254719662
+Fusarium_solani	Fusarium solani	Pezizomycotina	plants	2	0.301029995663981
+Fusarium_verticillioides	Gibberella fujikuroi	Pezizomycotina	plants	3	0.477121254719662
+Histoplasma_capsulatum	Histoplasma capsulatum	Pezizomycotina	human and animals	1	0
+Magnaporthe_grisea	Magnaporthe grisea	Pezizomycotina	plants	7	0.845098040014257
+Microsporum_canis	Microsporum canis	Pezizomycotina	human and animals	4	0.602059991327962
+Monilinia_fructicola	Monilinia fructicola	Pezizomycotina	plants	3	0.477121254719662
+Mucor_circinelloides	Mucor circinelloides	Mucoromycotina	human and animals	1	0
+Pseudocercospora_fijiensis	Mycosphaerella fijiensis	Pezizomycotina	plants	17	1.23044892137827
+Candida_glabrata	Nakaseomyces glabrata	Saccharomycotina	human and animals	431	2.63447727016073
+Passalora_fulva	Passalora fulva	Pezizomycotina	plants	2	0.301029995663981
+Penicillium_digitatum	Penicillium digitatum	Pezizomycotina	human and plants	3	0.477121254719662
+Phaeosphaeria_nodorum	Phaeosphaeria nodorum	Pezizomycotina	plants	2	0.301029995663981
+Phakopsora_pachyrhizi	Phakopsora pachyrhizi	Pucciniomycotina	plants	9	0.954242509439325
+Pneumocystis_jirovecii	Pneumocystis jirovecii	Taphrinomycotina	human and animals	381	2.58092497567562
+Puccinia_horiana	Puccinia horiana	Pucciniomycotina	plants	3	0.477121254719662
+Puccinia_triticina	Puccinia triticina	Pucciniomycotina	plants	1	0
+Pyrenopeziza_brassicae	Pyrenopeziza brassicae	Pezizomycotina	plants	7	0.845098040014257
+Pyrenophora_teres	Pyrenophora teres	Pezizomycotina	plants	10	1
+Pyrenophora_tritici_repentis	Pyrenophora tritici-repentis	Pezizomycotina	plants	3	0.477121254719662
+Ramularia_collo_cygni	Ramularia collo-cygni	Pezizomycotina	plants	22	1.34242268082221
+Rhizoctonia_cerealis	Rhizoctonia cerealis	Agaricomycotina	plants	6	0.778151250383644
+Rhizoctonia_solani	Rhizoctonia solani	Agaricomycotina	plants	5	0.698970004336019
+Saccharomyces_cerevisiae	Saccharomyces cerevisiae	Saccharomycotina	human and animals	4049	3.60734777676841
+Saccharomyces_paradoxus	Saccharomyces paradoxus	Saccharomycotina	saprotroph	25	1.39794000867204
+Sclerotinia_sclerotiorum	Sclerotinia sclerotiorum	Pezizomycotina	plants	3	0.477121254719662
+Septoria_glycines	Septoria glycines	Pezizomycotina	plants	1	0
+Tapesia_acuformis	Tapesia acuformis	Pezizomycotina	plants	6	0.778151250383644
+Tapesia_yallundae	Tapesia yallundae	Pezizomycotina	plants	7	0.845098040014257
+Trichophyton_indotineae	Trichophyton indotineae	Pezizomycotina	human and animals	3	0.477121254719662
+Trichophyton_interdigitale	Trichophyton interdigitale	Pezizomycotina	human and animals	6	0.778151250383644
+Trichophyton_mentagrophytes	Trichophyton mentagrophytes	Pezizomycotina	human and animals	1	0
+Trichophyton_rubrum	Trichophyton rubrum	Pezizomycotina	human and animals	21	1.32221929473392
+Venturia_inaequalis	Venturia inaequalis	Pezizomycotina	plants	5	0.698970004336019
+Venturia_nashicola	Venturia nashicola	Pezizomycotina	plants	1	0
+Ustilaginoidea_virens	Villosiclava virens	Pezizomycotina	plants	1	0
+Zymoseptoria_tritici	Zymoseptoria tritici	Pezizomycotina	plants	50	1.69897000433602
+Capniomyces_stellatus	NA	NA	none	NA	NA
+Smittium_mucronatum	NA	NA	none	NA	NA
+Conidiobolus_coronatus	NA	NA	none	NA	NA
