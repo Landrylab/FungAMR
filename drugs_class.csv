@@ -1,0 +1,74 @@
+drug,usage,class
+Flusilazole,Agricultural,Agricultural azoles
+Cyproconazole,Agricultural,Agricultural azoles
+Epoxiconazole,Agricultural,Agricultural azoles
+Metconazole,Agricultural,Agricultural azoles
+Prochloraz,Agricultural,Agricultural azoles
+Prothioconazole,Agricultural,Agricultural azoles
+Tebuconazole,Agricultural,Agricultural azoles
+Procymidone,Agricultural,Dicarboximides
+Iprodione,Agricultural,Dicarboximides
+Azoxystrobin,Agricultural,Qo inhibitors
+Pyraclostrobin,Agricultural,Qo inhibitors
+Benzovindiﬂupyr,Agricultural,SDH inhibitors
+Bixafen,Agricultural,SDH inhibitors
+Fluxapyroxad,Agricultural,SDH inhibitors
+Boscalid,Agricultural,SDH inhibitors
+Fluopyram,Agricultural,SDH inhibitors
+Isopyrazam,Agricultural,SDH inhibitors
+Penthiopyrad,Agricultural,SDH inhibitors
+Carboxin,Agricultural,SDH inhibitors
+Pyracarbolid,Agricultural,SDH inhibitors
+Methfuroxam,Agricultural,SDH inhibitors
+Thifluzamide,Agricultural,SDH inhibitors
+Diethofencarb,Agricultural,Tubulin polymerization
+Benomyl,Agricultural,Tubulin polymerization
+Carbendazim,Agricultural,Tubulin polymerization
+Clotrimazole,Clinical,Clinical azoles
+Fluconazole,Clinical,Clinical azoles
+Isavuconazole,Clinical,Clinical azoles
+Itraconazole,Clinical,Clinical azoles
+Ketoconazole,Clinical,Clinical azoles
+Miconazole,Clinical,Clinical azoles
+Posaconazole,Clinical,Clinical azoles
+Voriconazole,Clinical,Clinical azoles
+Anidulafungin,Clinical,Echinocandins
+Caspofungin,Clinical,Echinocandins
+Echinocandin,Clinical,Echinocandins
+Micafungin,Clinical,Echinocandins
+AmphotericinB,Clinical,Polyenes
+Nystatin,Clinical,Polyenes
+5-fluorouracil,Clinical,Pyrimidine analogs
+5-fluorocytosine,Clinical,Pyrimidine analogs
+Tolnaftate,Clinical,Squalene epoxidase
+Terbinafine,Clinical,Squalene epoxidase
+Furcarbanil,Agricultural,SDH inhibitors
+Cycloheximide,Experimental,Dicarboximides
+Everolimus,Experimental,Kinase inhibitors
+Lapatinib,Experimental,Kinase inhibitors
+Miltefosine,Experimental,Kinase inhibitors
+AN7973,Experimental,Others
+Diethylstilbestrol,Experimental,Others
+Tacrolimus,Experimental,Others
+Hygromycin B,Experimental,Others
+Cipargamin,Experimental,Others
+Camptothecin,Experimental,Topoisomerase inhibitors
+Doxorubicin,Experimental,Topoisomerase inhibitors
+Etoposide,Experimental,Topoisomerase inhibitors
+Lomerizine,Experimental,Unknown
+CBR113,Experimental,Unknown
+CBR868,Experimental,Unknown
+Clomipramine,Experimental,Unknown
+GNF-Pf-1618,Experimental,Unknown
+KAAA726,Experimental,Unknown
+MMV000570,Experimental,Unknown
+MMV007181,Experimental,Unknown
+MMV1078458,Experimental,Unknown
+MMV396736,Experimental,Unknown
+MMV665882,Experimental,Unknown
+Oxa-3a,Experimental,Unknown
+Oxa-3b,Experimental,Unknown
+Oxa-3c,Experimental,Unknown
+Oxa-3d,Experimental,Unknown
+Scy-078,Experimental,Unknown
+TCMDC-124263,Experimental,Unknown
