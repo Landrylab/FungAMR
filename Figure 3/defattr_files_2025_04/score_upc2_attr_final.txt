@@ -1,0 +1,11 @@
+#
+attribute: score
+match mode: 1-to-1
+recipient: residues
+	:142	8
+	:304	1
+	:478	1
+	:642	1
+	:643	1
+	:646	1
+	:648	1
