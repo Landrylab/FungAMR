@@ -62,13 +62,17 @@ class_colors <- c("drug target" = "#8C0250",
                   "Squalene epoxidase" = "#106BA7")
 
 #### Import files ####
-setwd("/home/aliciapageau/Documents/antifungal_project/mardy2.0/clean_code")
+setwd("/home/alicia/Documents/antifungal_project/mardy2.0/clean_code/update_jan_2025")
 
 # Read the CSV file
-database <- read.csv("FungAMR.csv", stringsAsFactors = FALSE, row.names = 1, na.strings = 'NA')
+database <- read.csv("FungAMR_240225.csv", stringsAsFactors = FALSE, row.names = 1, na.strings = 'NA')
 
-drugs_class <- read.csv("drugs_class.csv", stringsAsFactors = FALSE) %>% 
-  filter(usage != 'Experimental') %>% 
+drug_class <- c("SDH inhibitors","Qo inhibitors","Pyrimidine analogs","Polyenes",
+                "Echinocandins","Dicarboximides","Tubulin polymerization",
+                "Clinical azoles","Agricultural azoles","Squalene epoxidase")
+drugs_class <- read.csv("drugs_class.csv", stringsAsFactors = FALSE, sep = ';') %>% 
+  mutate(drug = str_replace_all(drug, "Amphotericin B", "AmphotericinB")) %>%
+  filter(class %in% drug_class) %>% 
   select(drug,class) %>% 
   mutate(ID = paste0(class, ".", drug)) 
 
@@ -88,7 +92,7 @@ database <- database %>%
 # Filter for resistance mutations (positive degree of evidence)
 # Filter for single gene mutations
 single_gene <- database %>%
-  filter(degree.of.evidence > 0) %>%
+  filter(confidence.score > 0) %>%
   filter(!grepl("\\|", mutation))
 
 ## Count for edgebundle plot
@@ -102,7 +106,7 @@ gene_species_drug_counts <- single_gene %>%
   filter(n() > 5) %>%
   group_by(ortho_homolog, species, drug) %>%
   summarise(count = n(),
-            evidence = min(best.degree.of.evidence))
+            evidence = min(Strongest.resistance.evidence.reported))
 
 # Filter out unclear drug and gene
 # Filter out hybrids species
@@ -167,7 +171,7 @@ V(graph)$color <- class_colors[V(graph)$class]
 V(graph)$size <- degree(graph) * 0.5
 
 # Generate the edgebundle plot with specified aesthetics
-edgebundle(graph, tension = 0.6, fontsize = 20, width = 1200, padding = 260)
+edgebundle(graph, tension = 0.6, fontsize = 19, width = 1200, padding = 260)
 
 
 #### Legends ####
