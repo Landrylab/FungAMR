@@ -63,17 +63,17 @@ class_colors <- c("drug target" = "#8C0250",
                   "Squalene epoxidase" = "#106BA7")
 
 #### Import files ####
-setwd("/home/aliciapageau/Documents/antifungal_project/mardy2.0/clean_code")
+setwd("/home/alicia/Documents/antifungal_project/mardy2.0/clean_code/update_jan_2025/")
 
 # Read the CSV file
-database <- read.csv("FungAMR.csv", stringsAsFactors = FALSE, row.names = 1, na.strings = 'NA')
+database <- read.csv("FungAMR_070425.csv", stringsAsFactors = FALSE, na.strings = 'NA') %>% select(-X)
 
-convert_pos <- read.csv("database_convert_pos_convergence.csv", stringsAsFactors = FALSE, header = TRUE, row.names = 1) %>%
-  select(first.author.name, species, gene.or.protein.name, mutation, degree.of.evidence,
+convert_pos <- read.csv("database_convert_pos_convergence_070425.csv", stringsAsFactors = FALSE, header = TRUE, row.names = 1) %>%
+  select(first.author.name, species, gene.or.protein.name, mutation, confidence.score,
          ortho_homolog, wt_AA, position, alt_AA, alignment_pos, ortho_mut, ortho_res, 
          convert_pos, convert_wt, conversion_species) %>% distinct()
 
-host <- read.csv("species_class.csv", stringsAsFactors = FALSE) %>% rename(host = class)
+#host <- read.csv("species_class.csv", stringsAsFactors = FALSE) %>% rename(host = class)
 species_class <- read.csv("species_class.csv", stringsAsFactors = FALSE) %>%
   mutate(species = sapply(species, abbreviate_species),
          ID = paste0(class, ".", species)) %>% distinct
@@ -99,7 +99,7 @@ convert_pos <- convert_pos %>%
 # Filter for resistance mutations (positive degree of evidence)
 # Filter for single gene mutations
 single_gene <- database %>%
-  filter(degree.of.evidence > 0) %>%
+  filter(confidence.score > 0) %>%
   filter(!grepl("\\|", mutation))
 
 ## Count for edgebundle plot
@@ -113,7 +113,7 @@ gene_species_drug_counts <- single_gene %>%
   filter(n() > 5) %>%
   group_by(ortho_homolog, species, drug) %>%
   summarise(count = n(),
-            evidence = min(best.degree.of.evidence))
+            evidence = min(Strongest.resistance.evidence.reported))
 
 # Filter out unclear drug and gene
 # Filter out hybrids species
@@ -132,8 +132,7 @@ gene_species_drug_counts <- gene_species_drug_counts %>%
 
 ## Convergence bar plot
 convergence <- single_gene %>% left_join(convert_pos) %>% 
-  left_join(select(genes_class, -ID)) %>% 
-  left_join(host)
+  left_join(select(genes_class, -ID))
 
 #### Figure 4A - Edgebundle plot genes and species ####
 ## Create edges from genes to species in the database
@@ -179,11 +178,11 @@ V(graph)$color <- class_colors[V(graph)$class]
 V(graph)$size <- degree(graph) * 0.5
 
 # Generate the edgebundle plot with specified aesthetics
-edgebundle(graph, tension = 0.6, fontsize = 20, width = 1000, padding = 150)
+edgebundle(graph, tension = 0.6, fontsize = 20, width = 1000, padding = 165)
 
 #### Figure 4B - Bar plot convergence genes ####
 # Define genes to exclude from the plot
-excluded_gene <- c('Hmg2', 'Hap1', 'Myosin-1')
+excluded_gene <- c('Chr6','Chr3','ChrV','Chr5','Chr1','Cyp51 promoter')#'Hmg2', 'Hap1', 'Myosin-1'
 
 # Filter and process convergence data
 convergence_gene <- convergence %>%
@@ -218,13 +217,14 @@ ggplot(convergence_gene, aes(x = count, y = ortho_homolog, fill = host)) +
         axis.text.x = element_text(),
         legend.position = 'none') +
   scale_fill_manual(values=class_colors)
-#ggsave("../figures/final/nb_species_genes_v4.png", device = "png", dpi = 600)
-#ggsave("../figures/final/nb_species_genes_v4.svg", device = "svg", dpi = 600)
+#ggsave("figures/figure4b_nb_species_genes.png", device = "png", dpi = 600)
+#ggsave("figures/figure4b_nb_species_genes.svg", device = "svg", dpi = 600)
 
 #### Figure 4C - Bar plot convergence mutations ####
 # Filter and process convergence data
 convergence_mut <- convergence %>%
-  filter(!is.na(ortho_res)) %>%          # Remove rows with NA orthologous residue
+  filter(!is.na(ortho_res)) %>%          # Remove rows with NA orthologuous residue
+  filter(ortho_res != "") %>%
   group_by(ortho_res) %>%                # Group by orthologous residue
   mutate(
     n_species = n_distinct(species),     # Count unique species
@@ -256,8 +256,8 @@ ggplot(convergence_mut, aes(x = count, y = mutation, fill = host)) +
         axis.text.x = element_text(),
         legend.position = 'none') +
   scale_fill_manual(values=class_colors)
-#ggsave("../figures/final/nb_species_mutations.png", device = "png", dpi = 600)
-#ggsave("../figures/final/nb_species_mutations.svg", device = "svg", dpi = 600)
+#ggsave("figures/figure4c_nb_species_mutations.png", device = "png", dpi = 600)
+#ggsave("figures/figure4c_nb_species_mutations.svg", device = "svg", dpi = 600)
 
 #### Legends ####
 
@@ -276,7 +276,6 @@ class_colors_species <- c(
   "Saprotroph" = "white"
 )
 
-
 # Function to create custom legends with dots and title on the left in bold
 create_dot_legend <- function(labels, colors, title) {
   plot.new()
@@ -289,12 +288,12 @@ create_dot_legend <- function(labels, colors, title) {
 }
 
 # Genes class legend
-svg(filename = "../figures/final/legend_genes.svg", width = 5, height = 5)
-create_dot_legend(names(class_colors_gene), class_colors_gene, "Gene class")
-dev.off()
+#svg(filename = "../figures/final/legend_genes.svg", width = 5, height = 5)
+#create_dot_legend(names(class_colors_gene), class_colors_gene, "Gene class")
+#dev.off()
 
 # Species class legend
-svg(filename = "../figures/final/legend_species.svg", width = 5, height = 5)
-create_dot_legend(names(class_colors_species), class_colors_species, "Specie class")
-dev.off()
+#svg(filename = "../figures/final/legend_species.svg", width = 5, height = 5)
+#create_dot_legend(names(class_colors_species), class_colors_species, "Specie class")
+#dev.off()
 
