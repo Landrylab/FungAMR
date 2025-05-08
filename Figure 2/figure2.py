@@ -11,8 +11,16 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
+import scipy
 from scipy.stats import zscore
 from matplotlib.colors import LinearSegmentedColormap
+
+print('pandas', pd.__version__)
+print('matplotlib', plt.matplotlib.__version__)
+print('numpy', np.__version__)
+print('seaborn', sns.__version__)
+print('scipy', scipy.__version__)
+
 
 gene_colors = {'Erg11 DMS': '#8C0250',
                'Fcy1 DMS': '#71AED4',
@@ -43,17 +51,45 @@ gene_colors = {'Erg11 DMS': '#8C0250',
                'Pdr3': '#8361CB', 
                'Dhh1':'#20B2AA', 
                'Yrr1':'#404040',
-               'SdhB':'#91CEF4', 
+               'Sdh':'#91CEF4', 
                'Fcy1':'#404040'}
 
 # %% Import files
-working_directory = '/home/aliciapageau/Documents/antifungal_project/mardy2.0/clean_code/Figure 2/'
+working_directory = '/home/alicia/Documents/antifungal_project/mardy2.0/clean_code/update_jan_2025/Figure 2/'
 os.chdir(working_directory)
 
-data = pd.read_csv(f"{working_directory}FungAMR_one_mut_per_row.csv", index_col=0)
+data = pd.read_csv(f"{working_directory}../FungAMR_04_30_2025.csv", index_col=0)
 gemme = pd.read_csv(f"{working_directory}gemme_scores.csv", index_col=0)
 mutatex = pd.read_csv(f"{working_directory}mutatex_results.csv", index_col=0)
 mutatex['ddG'] = mutatex['ddG']*-1
+
+# Drop rows without ref_seq accession in data
+data['ref_seq_uniprot_accession'] = data['ref_seq_uniprot_accession'].astype(str)
+data = data[~data['ref_seq_uniprot_accession'].str.contains('nan')]
+
+# Get database to long format (one mutation per row)
+df_long = data.copy()
+df_long['gene or protein name'] = df_long['gene or protein name'].apply(lambda x: x.split(','))
+df_long['ortho_homolog'] = df_long['ortho_homolog'].apply(lambda x: x.split(','))
+df_long['ref_seq_uniprot_accession'] = df_long['ref_seq_uniprot_accession'].apply(lambda x: x.split(','))
+
+# Convert mutations to list of list
+df_long['mutation'] = df_long.apply(lambda row: 
+    [row['mutation'].split(',')] if len(row['gene or protein name']) <= 1 else 
+    [item.strip().split(',') for item in row['mutation'].split('|')],
+    axis=1)
+
+# Concatenate and exploded dataframe
+df_long = df_long.explode(['gene or protein name', 'mutation', 'ortho_homolog','ref_seq_uniprot_accession'], ignore_index=True)
+df_long = df_long.explode('mutation').reset_index(drop=True)
+df_long['gene or protein name'] = df_long['gene or protein name'].str.strip()
+df_long['mutation'] = df_long['mutation'].str.strip()
+df_long = df_long.drop_duplicates()
+
+# Extract position from mutation
+df_long[['wt_AA', 'position', 'alt_AA']] = df_long['mutation'].str.extract(r'(\D+)(\d+)(\D+)')
+
+data = df_long.copy()
 
 # %% Figure 2 - Gemme and MutateX
 # Merging gemme and mutatex datasets, removing duplicates
@@ -65,14 +101,23 @@ gemme_mutatex['zscore_gemme'] = zscore(gemme_mutatex['gemme'])
 gemme_mutatex['zscore_ddG'] = zscore(gemme_mutatex['ddG'])
 #gemme_mutatex.loc[gemme_mutatex['zscore_ddG'] < -4, 'zscore_ddG'] = -4
 
+gemme_mutatex['species'] = gemme_mutatex['species'].str.strip()
+gemme_mutatex["species"] = gemme_mutatex["species"].replace("Nakaseomyces glabrata", "Nakaseomyces glabratus", regex=True)
+gemme_mutatex["species"] = gemme_mutatex["species"].replace("Candida famata", "Debaryomyces hansenii", regex=True)
+gemme_mutatex["species"] = gemme_mutatex["species"].replace("Candida krusei", "Pichia kudriavzevii", regex=True)
+gemme_mutatex["species"] = gemme_mutatex["species"].replace("Candida kefyr", "Kluyveromyces marxianus", regex=True)
+gemme_mutatex["species"] = gemme_mutatex["species"].replace("Candida lusitaniae", "Clavispora lusitaniae", regex=True)
+gemme_mutatex["species"] = gemme_mutatex["species"].replace("Candida auris", "Candidozyma auris", regex=True)
+
 # Filtering resistant mutations and setting DMS for specific evidence degrees
-resistant_mutations = data[data['degree of evidence'] > 0].copy()
+resistant_mutations = data[data['confidence score'] > 0].copy()
 resistant_mutations['position'] = pd.to_numeric(resistant_mutations['position'], errors='coerce')
-resistant_mutations.loc[resistant_mutations['degree of evidence'].isin([3, -3]), 'DMS'] = ' DMS'
+resistant_mutations.loc[resistant_mutations['confidence score'].isin([3, -3]), 'DMS'] = ' DMS'
 
 # Merging resistant mutations with gemme and mutatex data
 merged_data = pd.merge(resistant_mutations, gemme_mutatex, how='inner',
-                       on=['species', 'uniprot', 'ortho_homolog', 'wt_AA', 'position', 'alt_AA', 'mutation'])
+                       left_on=['species', 'ref_seq_uniprot_accession', 'ortho_homolog', 'wt_AA', 'position', 'alt_AA', 'mutation'],
+                       right_on=['species', 'uniprot_accession', 'ortho_homolog', 'wt_AA', 'position', 'alt_AA', 'mutation'])
 
 # List of species to match and rename ortho_homolog to Erg11
 species_list = [
@@ -87,7 +132,7 @@ merged_data.loc[(merged_data['species'].isin(species_list)) &
 
 # Creating unique identifier ID and selecting relevant columns
 merged_data['ID'] = merged_data['ortho_homolog'].str.cat(merged_data['DMS'].fillna(''), sep='')
-plot_data = merged_data[['ID', 'species', 'ortho_homolog', 'uniprot', 'mutation', 'gemme', 'ddG', 'zscore_gemme', 'zscore_ddG']]
+plot_data = merged_data[['ID', 'species', 'ortho_homolog', 'ref_seq_uniprot_accession', 'mutation', 'gemme', 'ddG', 'zscore_gemme', 'zscore_ddG']]
 plot_data = plot_data.drop_duplicates()
 
 # Filtering genes with at least 10 unique mutations
@@ -168,7 +213,7 @@ for i in range(plot_filtered.shape[0]):
 # Define custom size labels for the legend
 size_labels = ['[0, 30[', '[30, 100[', '[100, 500[', '500+']
 handles, labels = scatter.get_legend_handles_labels()
-scatter.legend(handles[24:], size_labels, title='Resistant mutations',
+scatter.legend(handles[24:], size_labels, title='Number of resistance\nmutations',
                title_fontsize='10', loc='lower right', fontsize='9')
 
 # Customize axis labels and ticks
@@ -193,5 +238,5 @@ ax.set_aspect('auto')
 plt.tight_layout()
 plt.show()
 #plt.rcParams['svg.fonttype'] = 'none'
-#plt.savefig(f"{working_directory}../figures/final/scatter_gemme_ddg.png", dpi=600, bbox_inches='tight')
-#plt.savefig(f"{working_directory}../figures/final/scatter_gemme_ddg.svg", bbox_inches='tight')
+#plt.savefig(f"{working_directory}../figures/figure2_scatter_gemme_ddg.png", dpi=600, bbox_inches='tight')
+#plt.savefig(f"{working_directory}../figures/figure2_scatter_gemme_ddg.svg", bbox_inches='tight')
