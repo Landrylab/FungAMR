@@ -15,16 +15,45 @@ import seaborn as sns
 from scipy.stats import zscore
 
 
+
+
 # %% Import files
-working_directory = '/home/aliciapageau/Documents/antifungal_project/mardy2.0/clean_code/'
+working_directory = '/home/alicia/Documents/antifungal_project/mardy2.0/clean_code/update_jan_2025/'
 os.chdir(working_directory)
 
-database = pd.read_csv(f"{working_directory}FungAMR.csv", index_col=0)
-final = pd.read_csv(f"{working_directory}FungAMR_one_mut_per_row.csv", index_col=0)
+data = pd.read_csv(f"{working_directory}FungAMR_070425.csv", index_col=0)
 gene_class = pd.read_csv("genes_class.csv")
 gemme = pd.read_csv(f"{working_directory}gemme_scores.csv", index_col=0)
 mutatex = pd.read_csv(f"{working_directory}mutatex_results.csv", index_col=0)
 mutatex['ddG'] = mutatex['ddG']*-1
+
+# Drop rows without ref_seq accession in data
+data['ref_seq_uniprot_accession'] = data['ref_seq_uniprot_accession'].astype(str)
+data = data[~data['ref_seq_uniprot_accession'].str.contains('nan')]
+
+# Get database to long format (one mutation per row)
+df_long = data.copy()
+df_long['gene or protein name'] = df_long['gene or protein name'].apply(lambda x: x.split(','))
+df_long['ortho_homolog'] = df_long['ortho_homolog'].apply(lambda x: x.split(','))
+df_long['ref_seq_uniprot_accession'] = df_long['ref_seq_uniprot_accession'].apply(lambda x: x.split(','))
+
+# Convert mutations to list of list
+df_long['mutation'] = df_long.apply(lambda row: 
+    [row['mutation'].split(',')] if len(row['gene or protein name']) <= 1 else 
+    [item.strip().split(',') for item in row['mutation'].split('|')],
+    axis=1)
+
+# Concatenate and exploded dataframe
+df_long = df_long.explode(['gene or protein name', 'mutation', 'ortho_homolog','ref_seq_uniprot_accession'], ignore_index=True)
+df_long = df_long.explode('mutation').reset_index(drop=True)
+df_long['gene or protein name'] = df_long['gene or protein name'].str.strip()
+df_long['mutation'] = df_long['mutation'].str.strip()
+df_long = df_long.drop_duplicates()
+
+# Extract position from mutation
+df_long[['wt_AA', 'position', 'alt_AA']] = df_long['mutation'].str.extract(r'(\D+)(\d+)(\D+)')
+
+final = df_long.copy()
 
 # %% Extended figure 1 - Ridgeline plot
 # Merging gemme and mutatex datasets, removing duplicates
@@ -36,13 +65,14 @@ gemme_mutatex['zscore_gemme'] = zscore(gemme_mutatex['gemme'])
 gemme_mutatex['zscore_ddG'] = zscore(gemme_mutatex['ddG'])
 
 # Filtering resistant mutations and setting DMS for specific evidence degrees
-resistant_mutations = final[final['degree of evidence'] > 0].copy()
+resistant_mutations = final[final['confidence score'] > 0].copy()
 resistant_mutations['position'] = pd.to_numeric(resistant_mutations['position'], errors='coerce')
-resistant_mutations.loc[resistant_mutations['degree of evidence'].isin([3, -3]), 'DMS'] = ' DMS'
+resistant_mutations.loc[resistant_mutations['confidence score'].isin([3, -3]), 'DMS'] = ' DMS'
 
 # Merging resistant mutations with gemme and mutatex data
 merged_data = pd.merge(resistant_mutations, gemme_mutatex, how='inner',
-                       on=['species', 'uniprot', 'ortho_homolog', 'wt_AA', 'position', 'alt_AA', 'mutation'])
+                       left_on=['species', 'ref_seq_uniprot_accession', 'ortho_homolog', 'wt_AA', 'position', 'alt_AA', 'mutation'],
+                       right_on=['species', 'uniprot_accession', 'ortho_homolog', 'wt_AA', 'position', 'alt_AA', 'mutation'])
 
 # List of species to match and rename ortho_homolog to Erg11
 species_list = [
@@ -105,7 +135,7 @@ plot = pd.merge(plot, gene_class)
 
 #ids and class order
 ids = ['Squalene epoxidase', 'Fur1', 'Fcy1 DMS', 'Fks DMS', 'Fks', 'Dhfr DMS', 'Dhfr',
-       'Erg11 DMS', 'Erg11', 'Cyp51','Cytochrome b', 'SdhB', 'Cdr1', 'Pdr1',
+       'Erg11 DMS', 'Erg11', 'Cyp51','Cytochrome b', 'Sdh', 'Cdr1', 'Pdr1',
        'Tac1', 'Mrr1', 'Hmg1','Sur1', 'Csg2', 'Erg3', 'Erg25','Msh2']
 
 plot = plot[plot['ID'].isin(ids)]
@@ -159,8 +189,8 @@ plt.setp(ax.get_xticklabels(), fontsize=12, fontweight='bold')
 plt.xlabel('z-score gemme', fontweight='bold', fontsize=18)
 plt.show()
 #plt.rcParams['svg.fonttype'] = 'none'
-#plt.savefig(f"{working_directory}../figures/final/ridgeline_gemme.png", dpi=600, bbox_inches='tight')
-#plt.savefig(f"{working_directory}../figures/final/ridgeline_gemme.svg", bbox_inches='tight')
+#plt.savefig(f"{working_directory}figures/figure_supp1_ridgeline_gemme.png", dpi=600, bbox_inches='tight')
+#plt.savefig(f"{working_directory}figures/figure_supp1_ridgeline_gemme.svg", bbox_inches='tight')
 
 
 ## Ridge line plot - MutateX
@@ -202,8 +232,8 @@ plt.setp(ax.get_xticklabels(), fontsize=12, fontweight='bold')
 plt.xlabel('z-score ddG * -1', fontweight='bold', fontsize=18)
 plt.show()
 #plt.rcParams['svg.fonttype'] = 'none'
-#plt.savefig(f"{working_directory}../figures/final/ridgeline_foldx.png", dpi=600, bbox_inches='tight')
-#plt.savefig(f"{working_directory}../figures/final/ridgeline_foldx.svg", bbox_inches='tight')
+#plt.savefig(f"{working_directory}figures/figure_supp1_ridgeline_foldx.png", dpi=600, bbox_inches='tight')
+#plt.savefig(f"{working_directory}figures/figure_supp1_ridgeline_foldx.svg", bbox_inches='tight')
 
 ## Grayscale bar with the number of resistant mutations
 # Calculate the number of observations for grayscale
@@ -234,5 +264,5 @@ plt.legend(handles=legend_patches, title='Resistant mutations', bbox_to_anchor=(
 
 plt.show()
 #plt.rcParams['svg.fonttype'] = 'none'
-#plt.savefig(f"{working_directory}../figures/final/ridgeline_grayscale.png", dpi=600, bbox_inches='tight')
-#plt.savefig(f"{working_directory}../figures/final/ridgeline_grayscale.svg", bbox_inches='tight')
+#plt.savefig(f"{working_directory}figures/figure_supp1_ridgeline_grayscale.png", dpi=600, bbox_inches='tight')
+#plt.savefig(f"{working_directory}figures/figure_supp1_ridgeline_grayscale.svg", bbox_inches='tight')
