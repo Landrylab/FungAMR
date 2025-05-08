@@ -1,74 +1,207 @@
-drug,usage,class
-Flusilazole,Agricultural,Agricultural azoles
-Cyproconazole,Agricultural,Agricultural azoles
-Epoxiconazole,Agricultural,Agricultural azoles
-Metconazole,Agricultural,Agricultural azoles
-Prochloraz,Agricultural,Agricultural azoles
-Prothioconazole,Agricultural,Agricultural azoles
-Tebuconazole,Agricultural,Agricultural azoles
-Procymidone,Agricultural,Dicarboximides
-Iprodione,Agricultural,Dicarboximides
-Azoxystrobin,Agricultural,Qo inhibitors
-Pyraclostrobin,Agricultural,Qo inhibitors
-Benzovindiﬂupyr,Agricultural,SDH inhibitors
-Bixafen,Agricultural,SDH inhibitors
-Fluxapyroxad,Agricultural,SDH inhibitors
-Boscalid,Agricultural,SDH inhibitors
-Fluopyram,Agricultural,SDH inhibitors
-Isopyrazam,Agricultural,SDH inhibitors
-Penthiopyrad,Agricultural,SDH inhibitors
-Carboxin,Agricultural,SDH inhibitors
-Pyracarbolid,Agricultural,SDH inhibitors
-Methfuroxam,Agricultural,SDH inhibitors
-Thifluzamide,Agricultural,SDH inhibitors
-Diethofencarb,Agricultural,Tubulin polymerization
-Benomyl,Agricultural,Tubulin polymerization
-Carbendazim,Agricultural,Tubulin polymerization
-Clotrimazole,Clinical,Clinical azoles
-Fluconazole,Clinical,Clinical azoles
-Isavuconazole,Clinical,Clinical azoles
-Itraconazole,Clinical,Clinical azoles
-Ketoconazole,Clinical,Clinical azoles
-Miconazole,Clinical,Clinical azoles
-Posaconazole,Clinical,Clinical azoles
-Voriconazole,Clinical,Clinical azoles
-Anidulafungin,Clinical,Echinocandins
-Caspofungin,Clinical,Echinocandins
-Echinocandin,Clinical,Echinocandins
-Micafungin,Clinical,Echinocandins
-AmphotericinB,Clinical,Polyenes
-Nystatin,Clinical,Polyenes
-5-fluorouracil,Clinical,Pyrimidine analogs
-5-fluorocytosine,Clinical,Pyrimidine analogs
-Tolnaftate,Clinical,Squalene epoxidase
-Terbinafine,Clinical,Squalene epoxidase
-Furcarbanil,Agricultural,SDH inhibitors
-Cycloheximide,Experimental,Dicarboximides
-Everolimus,Experimental,Kinase inhibitors
-Lapatinib,Experimental,Kinase inhibitors
-Miltefosine,Experimental,Kinase inhibitors
-AN7973,Experimental,Others
-Diethylstilbestrol,Experimental,Others
-Tacrolimus,Experimental,Others
-Hygromycin B,Experimental,Others
-Cipargamin,Experimental,Others
-Camptothecin,Experimental,Topoisomerase inhibitors
-Doxorubicin,Experimental,Topoisomerase inhibitors
-Etoposide,Experimental,Topoisomerase inhibitors
-Lomerizine,Experimental,Unknown
-CBR113,Experimental,Unknown
-CBR868,Experimental,Unknown
-Clomipramine,Experimental,Unknown
-GNF-Pf-1618,Experimental,Unknown
-KAAA726,Experimental,Unknown
-MMV000570,Experimental,Unknown
-MMV007181,Experimental,Unknown
-MMV1078458,Experimental,Unknown
-MMV396736,Experimental,Unknown
-MMV665882,Experimental,Unknown
-Oxa-3a,Experimental,Unknown
-Oxa-3b,Experimental,Unknown
-Oxa-3c,Experimental,Unknown
-Oxa-3d,Experimental,Unknown
-Scy-078,Experimental,Unknown
-TCMDC-124263,Experimental,Unknown
+drug;usage;class
+Phenamacril;Agricultural;Actin/myosin/fimbrin function
+Bitertanol;Agricultural;Agricultural azoles
+Bromuconazole;Agricultural;Agricultural azoles
+Cyproconazole;Agricultural;Agricultural azoles
+Difenoconazole;Agricultural;Agricultural azoles
+Epoxiconazole;Agricultural;Agricultural azoles
+Fenarimol;Agricultural;Agricultural azoles
+Fenbuconazole;Agricultural;Agricultural azoles
+Fluquinconazole;Agricultural;Agricultural azoles
+Flusilazole;Agricultural;Agricultural azoles
+Flutriafol;Agricultural;Agricultural azoles
+Hexaconazole;Agricultural;Agricultural azoles
+Imazalil;Agricultural;Agricultural azoles
+Metconazole;Agricultural;Agricultural azoles
+Myclobutanil;Agricultural;Agricultural azoles
+Oxpoconazole;Agricultural;Agricultural azoles
+Penconazole;Agricultural;Agricultural azoles
+Prochloraz;Agricultural;Agricultural azoles
+Propiconazole;Agricultural;Agricultural azoles
+Prothioconazole;Agricultural;Agricultural azoles
+Prothioconazole-desthio;Agricultural;
+Pyrifenox;Agricultural;Agricultural azoles
+Tebuconazole;Agricultural;Agricultural azoles
+Triadimefon;Agricultural;Agricultural azoles
+Triadimenol;Agricultural;Agricultural azoles
+Triflumizole;Agricultural;Agricultural azoles
+Dicarboximide fungicides;Agricultural;
+Iprodione;Agricultural;Dicarboximides
+Procymidone;Agricultural;Dicarboximides
+Tavaborole;Agricultural;Leucyl-tRNA synthetase
+Fludioxonil;Agricultural;Osmotic signal transduction
+Fludioxonil, Iprodione;Agricultural;Osmotic signal transduction
+Vinclozolin;Agricultural;Osmotic signal transduction
+Azoxystrobin;Agricultural;Qo inhibitors
+Azoxystrobin (with SHAM);Agricultural;
+Benzothiostrobin;Agricultural;Qo inhibitors
+Famoxadone;Agricultural;Qo inhibitors
+Kresoxim-methyl;Agricultural;Qo inhibitors
+Picoxystrobin;Agricultural;Qo inhibitors
+Pyraclostrobin;Agricultural;Qo inhibitors
+Pyraoxystrobin;Agricultural;Qo inhibitors
+Strobilurin;Agricultural;Qo inhibitors
+Trifloxystrobin;Agricultural;Qo inhibitors
+Tricyclazole;Agricultural;Reductase in melanin biosynthesis
+Benodanil;Agricultural;SDH inhibitors
+Benzovindiflupyr;Agricultural;SDH inhibitors
+Bixafen;Agricultural;SDH inhibitors
+Boscalid;Agricultural;SDH inhibitors
+Carboxin;Agricultural;SDH inhibitors
+Cyclobutrifluram;Agricultural;SDH inhibitors
+Flubeneteram;Agricultural;SDH inhibitors
+Fluopyram;Agricultural;SDH inhibitors
+Flutolanil;Agricultural;SDH inhibitors
+Fluxapyroxad;Agricultural;SDH inhibitors
+Furcarbanil;Agricultural;SDH inhibitors
+Isofetamid;Agricultural;SDH inhibitors
+Isopyrazam;Agricultural;SDH inhibitors
+Methfuroxam;Agricultural;SDH inhibitors
+Oxycarboxin;Agricultural;SDH inhibitors
+Penflufen;Agricultural;SDH inhibitors
+Penthiopyrad;Agricultural;SDH inhibitors
+Pydiflumetofen;Agricultural;SDH inhibitors
+Pyracarbolid;Agricultural;SDH inhibitors
+Thifluzamide;Agricultural;SDH inhibitors
+Naftifine;Agricultural;Squalene epoxidase
+Benomyl;Agricultural;Tubulin polymerization
+Benzimidazole;Agricultural;Tubulin polymerization
+Carbendazim;Agricultural;Tubulin polymerization
+Carbendazim/Thiophanate-methyl;Agricultural;
+Diethofencarb;Agricultural;Tubulin polymerization
+Thiabendazole;Agricultural;Tubulin polymerization
+Thiophanate-methyl;Agricultural;Tubulin polymerization
+Zoxamide;Agricultural;Tubulin polymerization
+Fenpropimorph;Agricultural;Sterol biosynthesis (erg2, erg 24)
+Demethylation inhibitors;Agricultural;
+Sulfomethuronmethyl;Agricultural;
+Bifonazole;Clinical;Clinical azoles
+Clotrimazole;Clinical;Clinical azoles
+Fluconazole;Clinical;Clinical azoles
+Isavuconazole;Clinical;Clinical azoles
+Itraconazole;Clinical;Clinical azoles
+Ketoconazole;Clinical;Clinical azoles
+Miconazole;Clinical;Clinical azoles
+Oteseconazole;Clinical;Clinical azoles
+Posaconazole;Clinical;Clinical azoles
+Ravuconazole;Clinical;Clinical azoles
+Voriconazole;Clinical;Clinical azoles
+Trimethoprim;Clinical;DHFR inhibitors
+Trimethoprim-sulfamethoxazole;Clinical;DHFR inhibitors
+Trimethoprim-sulfamethoxazole/Pyrimethamine-atovaquone;Clinical;DHFR inhibitors
+Trimethoprim, Sulfamethoxazole;Clinical;DHFR inhibitors
+Trimethoprim, Sulfamethoxazole, Dapsone;Clinical;DHFR inhibitors
+Anidulafungin;Clinical;Echinocandins
+Caspofungin;Clinical;Echinocandins
+Echinocandin;Clinical;Echinocandins
+Micafungin;Clinical;Echinocandins
+Amphotericin B;Clinical;Polyenes
+Nystatin;Clinical;Polyenes
+5-fluorocytosine;Clinical;Pyrimidine analogs
+5-fluorouracil;Clinical;Pyrimidine analogs
+Butenafine;Clinical;Squalene epoxidase
+Terbinafine;Clinical;Squalene epoxidase
+Tolnaftate;Clinical;Squalene epoxidase
+5-fluorocytosine+Fluconazole;Clinical;
+5-fluorocytosine+Itraconazole;Clinical;
+5-fluorocytosine+Ketoconazole;Clinical;
+5-fluorocytosine+Posaconazole;Clinical;
+5-fluorocytosine+Voriconazole;Clinical;
+5-fluorouracil+Fluconazole;Clinical;
+5-fluorouracil+Itraconazole;Clinical;
+5-fluorouracil+Ketoconazole;Clinical;
+5-fluorouracil+Posaconazole;Clinical;
+5-fluorouracil+Voriconazole;Clinical;
+Atovaquone;Clinical;
+Fluconazole with CaCl2;Clinical;
+Pentamidine;Clinical;
+Pyrrolnitrin;Clinical;
+Undecanoic acid;Clinical;
+Bafilomycin;Experimental;ATPase inhibitors
+Cycloheximide;Experimental;Dicarboximides
+Lapatinib;Experimental;Kinase inhibitors
+Miltefosine;Experimental;Kinase inhibitors
+Staurosporine;Experimental;Kinase inhibitors
+AN7973;Experimental;Others
+Cipargamin;Experimental;Others
+Hygromycin B;Experimental;Others
+Tacrolimus;Experimental;Others
+Antimycin A;Experimental;Qo inhibitors
+Myxothiazol;Experimental;Qo inhibitors
+Doxorubicin;Experimental;Topoisomerase inhibitors
+1,10-Phenanthroline;Experimental;
+4-Nitroquinoline;Experimental;
+Amitryptyline;Experimental;
+Aprotinin;Experimental;
+Arborcandin C;Experimental;
+Artemisinin;Experimental;
+Aureobasidin A;Experimental;
+Brefeldin A;Experimental;
+Camptothecin;Experimental;
+CBR110;Experimental;
+CBR113;Experimental;
+CBR668;Experimental;
+CBR868;Experimental;
+CD101;Experimental;
+Cerulenin;Experimental;
+Clomipramine;Experimental;
+Crystal violet;Experimental;
+CWHM-974;Experimental;
+DDD01027481;Experimental;
+DDD01035522;Experimental;
+Diamide;Experimental;
+Diethylstilbestrol;Experimental;
+Diuron;Experimental;
+Dodecanol;Experimental;
+Edelfosine;Experimental;
+Etoposide;Experimental;
+Everolimus;Experimental;
+Fluphenazine;Experimental;
+Geldamycin;Experimental;
+GNF-Pf-1618;Experimental;
+GNF-Pf-2740;Experimental;
+GNF-Pf-3582;Experimental;
+GNF-Pf-3891;Experimental;
+GNF-Pf-4283;Experimental;
+GNF-PF-445;Experimental;
+GNF-PF-4583;Experimental;
+GNF-Pf-4739;Experimental;
+GNF-Pf-5129;Experimental;
+GNF-Pf-5468;Experimental;
+GNF-Pf-5639;Experimental;
+Hectochlorin;Experimental;
+Hydroxyurea;Experimental;
+KAAA726;Experimental;
+Lomerizine;Experimental;
+Lovastatin;Experimental;
+Mebendazole;Experimental;
+Methotrexate;Experimental;
+MMV000442;Experimental;
+MMV000570;Experimental;
+MMV007181;Experimental;
+MMV019017;Experimental;
+MMV085203;Experimental;
+MMV1078458;Experimental;
+MMV1214532;Experimental;
+MMV396736;Experimental;
+MMV665807;Experimental;
+MMV665852;Experimental;
+MMV665882;Experimental;
+MMV665909;Experimental;
+MMV667491;Experimental;
+Myriocin;Experimental;
+Oligomycin;Experimental;
+Oxa-3a;Experimental;
+Oxa-3b;Experimental;
+Oxa-3c;Experimental;
+Oxa-3d;Experimental;
+Potassium cyanide (KCN);Experimental;
+Pyrimethamine-sulfadoxine;Experimental;
+Rapamycin;Experimental;
+Rhodamine 6G;Experimental;
+Scy-078;Experimental;
+Sertraline;Experimental;
+TCMDC-124263;Experimental;
+Tunicamycin;Experimental;
+Y12196;Experimental;
+Azole(s);;

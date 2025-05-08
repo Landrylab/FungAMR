@@ -8,11 +8,11 @@ Aspergillus terreus,human&animal
 Aspergillus tubingensis,human&animal
 Beauveria bassiana,human&animal
 Candida albicans,human&animal
-Candida auris,human&animal
+Candidozyma auris,human&animal
 Candida dubliniensis,human&animal
-Candida kefyr,human&animal
-Candida krusei,human&animal
-Candida lusitaniae,human&animal
+Kluyveromyces marxianus,human&animal
+Pichia kudriavzevii,human&animal
+Clavispora lusitaniae,human&animal
 Candida metapsilosis,human&animal
 Candida orthopsilosis,human&animal
 Candida parapsilosis,human&animal
@@ -24,7 +24,7 @@ Cryptococcus neoformans,human&animal
 Histoplasma capsulatum,human&animal
 Microsporum canis,human&animal
 Mucor circinelloides,human&animal
-Nakaseomyces glabrata,human&animal
+Nakaseomyces glabratus,human&animal
 Pneumocystis jirovecii,human&animal
 Saccharomyces cerevisiae,human&animal
 Trichophyton indotineae,human&animal
@@ -103,3 +103,11 @@ Cryptococcus neoformans/Cryptococcus deneoformans,human&animal
 Pyrenopeziza brassicae,plant
 Pyricularia oryzae triticum,plant
 Saccharomyces cerevisiae/Saccharomyces paradoxus,human&animal
+Debaryomyces hansenii,human&animal
+Pyricularia graminis-tritici,plant
+Pyricularia pennisetigena,plant
+Rhynchosporium commune,plant
+Schizosaccharomyces pombe,saprotroph
+Ustilaginoidea virens,plant
+Colletotrichum musae,plant
+Malassezia pachydermatis,human&animal
