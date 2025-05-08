@@ -69,15 +69,20 @@ class_colors <- c("drug target" = "#8C0250",
                   "Squalene epoxidase" = "#106BA7")
 
 #### Import files ####
-setwd("/home/aliciapageau/Documents/antifungal_project/mardy2.0/clean_code")
+setwd("/home/alicia/Documents/antifungal_project/mardy2.0/clean_code/update_jan_2025")
 
 # Read the CSV file
-database <- read.csv("FungAMR.csv", stringsAsFactors = FALSE, row.names = 1, na.strings = 'NA')
+database <- read.csv("FungAMR_070425.csv", stringsAsFactors = FALSE, na.strings = 'NA')
 
-drugs_class <- read.csv("drugs_class.csv", stringsAsFactors = FALSE) %>% 
-  filter(usage != 'Experimental') %>% 
+drug_class <- c("SDH inhibitors","Qo inhibitors","Pyrimidine analogs","Polyenes",
+                 "Echinocandins","Dicarboximides","Tubulin polymerization",
+                 "Clinical azoles","Agricultural azoles","Squalene epoxidase")
+drugs_class <- read.csv("drugs_class.csv", stringsAsFactors = FALSE, sep = ';') %>% 
+  mutate(drug = str_replace_all(drug, "Amphotericin B", "AmphotericinB")) %>%
+  filter(class %in% drug_class) %>% 
   select(drug,class) %>% 
   mutate(ID = paste0(class, ".", drug)) 
+
 
 genes_class <- read.csv("genes_class.csv", stringsAsFactors = FALSE) %>%
   filter(class != 'Unknown') %>%
@@ -92,10 +97,10 @@ database <- database %>%
   mutate(ortho_homolog = str_replace_all(ortho_homolog, "Beta-tubulin", "β-tubulin"))%>%
   mutate(drug = str_replace_all(drug, "Amphotericin B", "AmphotericinB"))
 
-# Filter for resistance mutations (positive degree of evidence)
+# Filter for resistance mutations (positive confidence score)
 # Filter for single gene mutations
 single_gene <- database %>%
-  filter(degree.of.evidence > 0) %>%
+  filter(confidence.score > 0) %>%
   filter(!grepl("\\|", mutation))
 
 # Filter for single mutation
@@ -113,7 +118,7 @@ gene_species_drug_counts <- single_gene %>%
   filter(n() > 5) %>%
   group_by(ortho_homolog, species, drug) %>%
   summarise(count = n(),
-            evidence = min(best.degree.of.evidence))
+            evidence = min(Strongest.resistance.evidence.reported))
 
 # Filter out unclear drug and gene
 # Filter out hybrids species
@@ -131,9 +136,15 @@ gene_species_drug_counts <- gene_species_drug_counts %>%
 # Count by mutation, gene, and drug
 # Filter for ortho_homolog present more than 5 times in the database
 mut_counts <- single_mut %>%
+  #group_by(ortho_homolog) %>%
+  #filter(n() > 5) %>%
+  #group_by(species) %>%
+  #filter(n() > 5) %>%
+  #group_by(drug) %>%
+  #filter(n() > 5) %>%
   group_by(ortho_homolog, ortho_mut, drug) %>%
   summarise(count = n(),
-            evidence = min(best.degree.of.evidence),
+            evidence = min(Strongest.resistance.evidence.reported),
             mutation = first(mutation)) 
 
 #### Figure 5A - Edgebundle plot drug to drug ####
@@ -141,14 +152,12 @@ mut_counts <- single_mut %>%
 # Filter out rows with NA orthologous mutations and group by ortho_mut
 from_to <- mut_counts %>%
   filter(!is.na(ortho_mut)) %>%
+  filter(ortho_mut != '') %>%
   group_by(ortho_mut) %>%
   # For each unique mutation, create a list of drug combinations where cross-resistance is observed
   summarize(drug_combinations = list(custom_combinations(drug))) %>%
   unnest(drug_combinations) %>%
   ungroup() #%>%
-
-# Remove the ortho_mut column as it is no longer needed
-#select(-ortho_mut)
 
 # Filter for drugs present in the drugs_class dataframe
 # Ensures that only classified drugs are included in the analysis
@@ -181,7 +190,7 @@ V(graph)$color <- class_colors[V(graph)$class]
 V(graph)$size <- degree(graph) * 0.5
 
 # Generate the edgebundle plot with specified aesthetics
-edgebundle(graph, tension = 0.6, fontsize = 20, width = 1000, padding = 150)
+edgebundle(graph, tension = 0.6, fontsize = 20, width = 1000, padding = 185)
 
 
 #### Figure 5B - Edgebundle plot genes and drugs ####
@@ -209,7 +218,9 @@ edges <- edges[, c("drug", "ortho_homolog")]
 # This helps in focusing on convergence patterns
 edges <- edges %>% 
   group_by(ortho_homolog) %>% 
-  filter(n() > 1) 
+  filter(n() > 1)
+  #group_by(drug) %>% 
+  #filter(n() > 1) 
 
 ## Make a grouping dataframe for the edgebundle graph (must contain all unique IDs present in the edges)
 # Filter the groups to include only those IDs that are in the edges
@@ -228,7 +239,7 @@ V(graph)$color <- class_colors[V(graph)$class]
 V(graph)$size <- degree(graph) * 0.5
 
 # Generate the edgebundle plot with specified aesthetics
-edgebundle(graph, tension = 0.6, fontsize = 20, width = 1000, padding = 150)
+edgebundle(graph, tension = 0.6, fontsize = 20, width = 1000, padding = 160)
 
 
 #### Legends ####
