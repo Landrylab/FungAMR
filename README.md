@@ -4,9 +4,10 @@
 
 Repository containing data analysis scripts and figures for the FungAMR paper. A searchable version of Supplementary Table 1 is available at the [Comprehensive Antibiotic Resistance Database](http://card.mcmaster.ca).
 
-## Pre-Print
+## Paper and Pre-Print
 
-bioRxiv: [FungAMR: A comprehensive portrait of antimicrobial resistance mutations in fungi](https://www.biorxiv.org/content/10.1101/2024.10.07.617009v1).
+The paper presenting the FungAMR database is published in _Nature Microbiology_ [FungAMR: a comprehensive database for investigating fungal mutations associated with antimicrobial resistance](https://www.nature.com/articles/s41564-025-02084-7) 
+The preprint is available on bioRxiv: [FungAMR: A comprehensive portrait of antimicrobial resistance mutations in fungi](https://www.biorxiv.org/content/10.1101/2024.10.07.617009v1).
 
 ## Description of the confidence scores associated with curated mutations in FungAMR
 
