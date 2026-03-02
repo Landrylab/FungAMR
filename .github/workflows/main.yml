@@ -26,7 +26,7 @@ jobs:
       run: pip install requests
       
     - name: Run Python script to generate summary
-      run: python3 main.py
+      run: python3 traffic/main.py
       env:
         TRAFFIC_ACTION_TOKEN: ${{ secrets.TRAFFIC_ACTION_TOKEN }}
         TRAFFIC_ACTION_OWNER: ${{ secrets.TRAFFIC_ACTION_OWNER }}
